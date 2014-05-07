@@ -49,7 +49,7 @@ def topic_view(request, topic_id):
     t.click += 1
     t.save()
     n = t.node
-    posts = t.post_set.all()
+    posts = t.post_set.all().filter(deleted=False).order_by('-time_created')
     try:
         page = request.GET['page']
     except:
