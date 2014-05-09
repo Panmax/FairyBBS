@@ -160,7 +160,8 @@ def recent(request):
 def del_reply(request, post_id):
     p = post.objects.get(id=post_id)
     t_id = p.topic.id
-    p.delete()
+    p.deleted = True
+    p.save()
     return HttpResponseRedirect(reverse('topic_view', kwargs={'topic_id': t_id}))
 
 
